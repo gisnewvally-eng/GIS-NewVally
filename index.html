@@ -548,28 +548,19 @@ document.addEventListener('click', ()=>{
   }
 });
 
+
 /* -------------------------
    Floating scroll buttons behavior
    ------------------------- */
-/* -------------------------
-   Floating scroll buttons behavior
-   ------------------------- */
-const scrollUpBtn = document.getElementById('scrollUp');
-const scrollDownBtn = document.getElementById('scrollDown');
+document.getElementById('scrollUp').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  sidebar.scrollBy({top:-160, behavior:'smooth'});
+});
+document.getElementById('scrollDown').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  sidebar.scrollBy({top:160, behavior:'smooth'});
+});
 
-if(scrollUpBtn){
-  scrollUpBtn.addEventListener('click', e=>{
-    e.stopPropagation();
-    sidebar.scrollBy({top:-160, behavior:'smooth'});
-  });
-}
-
-if(scrollDownBtn){
-  scrollDownBtn.addEventListener('click', e=>{
-    e.stopPropagation();
-    sidebar.scrollBy({top:160, behavior:'smooth'});
-  });
-}
 
 /* Accessibility: trap focus inside sidebar when opened (basic) */
 sidebar.addEventListener('keydown', (e)=>{
@@ -591,6 +582,7 @@ setTimeout(()=>{
 </script>
 </body>
 </html>
+
 
 
 
