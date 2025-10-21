@@ -84,32 +84,6 @@
   }
   #sidebar.hidden{ transform: translateX(100%); }
 
-  /* floating arrows inside sidebar - fixed relative to sidebar (absolute inside it) */
-  .floating-buttons{
-    position:absolute;
-    top:8px;
-    right:8px;
-    display:flex;
-    gap:6px;
-    z-index:2100;
-    pointer-events:auto;
-  }
-  .floating-buttons button{
-    min-width:36px;
-    height:36px;
-    border-radius:6px;
-    border:none;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(4px);
-    box-shadow:0 2px 6px rgba(0,0,0,0.12);
-    cursor:pointer;
-    font-size:16px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .floating-buttons button:active{ transform:translateY(1px); }
-
   /* Sidebar sections */
   .sidebar-section{ margin-bottom:12px; padding-top:8px; }
   .sidebar-section h3{
@@ -182,20 +156,23 @@ footer .line2 {
 
 
   /* Toggle button */
-  #toggleSidebar{
+#toggleSidebar{
     position:fixed;
-    top: calc(var(--header-height) + 10px);
+    top: calc(var(--header-height) + 15px);
     right:10px;
     z-index:2050;
     background:var(--green);
     color:#000;
     border:none;
-    padding:8px 10px;
+    padding:12px 16px;
     border-radius:8px;
     font-weight:800;
+    font-size:20px;
+    min-width:50px;
+    min-height:50px;
     cursor:pointer;
     box-shadow:0 2px 6px rgba(0,0,0,0.12);
-  }
+}
 
   /* Loader overlay fullscreen */
   #loaderOverlay{
@@ -603,6 +580,7 @@ setTimeout(()=>{
 </script>
 </body>
 </html>
+
 
 
 
