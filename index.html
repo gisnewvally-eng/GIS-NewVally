@@ -332,13 +332,27 @@ function setDarkMode(isDark){
   sidebar.classList.toggle('dark', isDark);
   header.classList.toggle('dark', isDark);
 }
-document.querySelectorAll('input[name="basemap"]').forEach(radio=>{
-  radio.addEventListener('change', e=>{
-    map.eachLayer(l=>{ if(l instanceof L.TileLayer) map.removeLayer(l); });
+document.querySelectorAll('input[name="basemap"]').forEach(radio => {
+  radio.addEventListener("change", e => {
+    // إزالة جميع طبقات الأساس الحالية
+    map.eachLayer(l => { if(l instanceof L.TileLayer) map.removeLayer(l); });
+    // إضافة الطبقة الجديدة
     map.addLayer(baseMaps[e.target.value]);
-    setDarkMode(e.target.value === 'dark');
+
+    // تفعيل وضع الليل
+    setDarkMode(e.target.value === "dark");
+
+    // إخفاء أو إظهار طبقة المباني حسب نوع الخريطة
+    if(allLayers["المباني 🏢"]){
+      if(e.target.value === "satellite"){
+        map.removeLayer(allLayers["المباني 🏢"]);
+      } else {
+        map.addLayer(allLayers["المباني 🏢"]);
+      }
+    }
   });
 });
+
 
 /* --------------
    Icons (local files expected in repo)
@@ -589,6 +603,7 @@ setTimeout(()=>{
 </script>
 </body>
 </html>
+
 
 
 
