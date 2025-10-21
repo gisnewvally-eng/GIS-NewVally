@@ -159,26 +159,25 @@
   .layer-item:hover{ background:#e8ffe8; transform:translateY(-1px); }
 
   /* Footer */
-  footer{
-    position:fixed;
-    bottom:0; left:0; right:0;
-    height:var(--footer-height);
-    background:#145214;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-weight:700;
-    padding:8px;
-    z-index:2000;
-  }
-  footer .line2{ display:block; font-weight:600; font-size:13px; margin-top:2px; }
-  footer .line2{
-  display:block;
-  font-weight:600;
-  font-size:13px;
-  margin-top:2px;
+footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #145214;
+    color: #fff;
+    display: flex;
+    flex-direction: column; /* هذا السطر يجعل النصوص في أعمدة */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 700;
+    padding: 6px 0;
+    z-index: 2000;
+}
+
+footer .line2 {
+    font-weight: 600;
+    font-size: 13px;
+    margin-top: 2px;
 }
 
 
@@ -592,5 +591,6 @@ setTimeout(()=>{
 </script>
 </body>
 </html>
+
 
 
