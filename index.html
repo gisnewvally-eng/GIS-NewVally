@@ -121,16 +121,20 @@
   .layer-group.collapsed > .group-items{ display:none; }
   .group-items{ padding-top:6px; display:block; }
   .layer-item{
-    background:#f5f5f5;
-    color:#000; /* always black as requested */
+    background: rgba(245, 245, 245, 0.7); /* الشفافية 70% */
+    color:#000; /* لون النص أسود */
     padding:8px 10px;
     border-radius:6px;
     margin-bottom:8px;
     cursor:pointer;
-    transition:background .12s, transform .06s;
+    transition: background .12s, transform .06s;
     font-size:14px;
-  }
-  .layer-item:hover{ background:#e8ffe8; transform:translateY(-1px); }
+}
+
+.layer-item:hover{ 
+    background: rgba(232, 255, 232, 0.9); /* أخف قليلاً عند المرور */
+    transform: translateY(-1px); 
+}
 
   /* Footer */
 footer {
@@ -474,8 +478,8 @@ for(const [name, info] of Object.entries(layersInfo)){
 const layerGroupsDiv = document.getElementById('layerGroups');
 
 for(const [groupName, layerNames] of Object.entries(groups)){
-  const groupDiv = document.createElement('div');
-  groupDiv.className = 'layer-group';
+ const groupDiv = document.createElement('div');
+groupDiv.className = 'layer-group collapsed'; // الآن مغلقة افتراضياً
 
   const h4 = document.createElement('h4');
   h4.textContent = groupName;
@@ -584,6 +588,7 @@ setTimeout(()=>{
 </script>
 </body>
 </html>
+
 
 
 
