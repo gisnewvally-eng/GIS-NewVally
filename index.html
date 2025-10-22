@@ -300,25 +300,25 @@ footer .line2 {
     #sidebar{ height:70vh; top:var(--header-height); }
     .floating-buttons button{ min-width:34px; height:34px; font-size:15px; }
   }
- /* 🔹 North Arrow (الركن السفلي الأيسر) */
-#northArrow {
+/* 🔹 North Arrow داخل الخريطة */
+#map #northArrow {
   position: absolute;
-  bottom: 20px; /* أسفل الصفحة */
-  left: 20px;   /* يسار الصفحة */
+  bottom: 20px;
+  left: 20px;
   width: 60px;
   height: 60px;
-  background: rgba(255, 255, 255, 0.7); /* خلفية شفافة */
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 50%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2100;
+  z-index: 1000; /* أقل من الأزرار لضمان أنها فوقه */
   pointer-events: none;
   transition: transform 0.5s ease;
 }
 
-#northArrow::after {
+#map #northArrow::after {
   content: "";
   display: block;
   width: 40px;
@@ -327,15 +327,16 @@ footer .line2 {
 }
 
 /* في الوضع الليلي */
-body.dark-mode #northArrow {
+body.dark-mode #map #northArrow {
   background: rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
-/* 🔸 تعديل موقع مفتاح الشمال في وضع الجوال */
+
+/* 🔸 في الهواتف */
 @media (max-width: 768px) {
-  #northArrow {
-    bottom: 80px; /* اجعله أعلى قليلاً لتجنب تغطيته للفوتر */
-    left: 15px;   /* يمكنك ضبطها أيضًا حسب الحاجة */
+  #map #northArrow {
+    bottom: 90px; /* أعلى قليلًا لتجنّب الفوتر */
+    left: 15px;
   }
 }
 
@@ -399,10 +400,10 @@ body.dark-mode #northArrow {
   </aside>
 
   <!-- Map -->
-  <div id="map" role="application" aria-label="خريطة المرافق"></div>
-  
-  <!-- north Arrow -->
+  <div id="map" role="application" aria-label="خريطة المرافق">
+  <!-- سهم الشمال داخل الخريطة لتكون طبقاته مرتبة -->
   <div id="northArrow" title="اتجاه الشمال"></div>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -720,6 +721,7 @@ map.on("rotate", function(e) {
 </script>
 </body>
 </html>
+
 
 
 
