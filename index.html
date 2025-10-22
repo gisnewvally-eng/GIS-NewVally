@@ -715,10 +715,34 @@ map.on("rotate", function(e) {
   const angle = e.rotation || 0;
   document.getElementById("northArrow").style.transform = `rotate(${-angle}deg)`;
 });
+<script>
+// 🔄 دعم دوران الخريطة
+let currentRotation = 0;
+
+// إنشاء زر للدوران
+const rotateControl = L.control({ position: "topleft" });
+rotateControl.onAdd = function () {
+  const div = L.DomUtil.create("div", "leaflet-bar leaflet-control");
+  div.innerHTML = '<a href="#" id="rotateMapBtn" title="دور الخريطة" style="font-size:18px; line-height:26px;">⟳</a>';
+  div.style.background = "#fff";
+  div.style.textAlign = "center";
+  div.style.cursor = "pointer";
+  div.style.userSelect = "none";
+  div.onclick = function (e) {
+    e.preventDefault();
+    currentRotation = (currentRotation + 15) % 360; // ↩️ الدوران 15 درجة كل ضغطة
+    document.querySelector("#map").style.transform = `rotate(${currentRotation}deg)`;
+    document.querySelector("#map").style.transition = "transform 0.4s ease";
+  };
+  return div;
+};
+rotateControl.addTo(map);
+</script>
 
 </script>
 </body>
 </html>
+
 
 
 
