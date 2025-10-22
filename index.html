@@ -177,31 +177,35 @@ footer .line2 {
     cursor:pointer;
     box-shadow:0 2px 6px rgba(0,0,0,0.12);
 }
-/* 🎨 زر الطباعة - بنفس تصميم زر القوائم */
+/* 🖨️ زر الطباعة - بنفس تصميم زر القوائم مع تأثير توهج أخضر عند التمرير */
 #printMapBtn {
   position: fixed;
   top: calc(var(--header-height) + 10px);
-  left: 80px; /* إزاحة بسيطة لليمين لتفادي أزرار التحكم */
+  left: 110px; /* 🔹 تم إزاحته قليلاً لليمين لتفادي أدوات الخريطة */
   background: #333; /* نفس لون زر القوائم */
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
+  display: flex; /* لتوسيط الأيقونة تمامًا */
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
   z-index: 2050;
-  transition: background 0.25s ease, transform 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 #printMapBtn:hover {
   background: #555;
-  transform: scale(1.07);
+  transform: scale(1.08);
+  box-shadow: 0 0 12px 3px rgba(0, 255, 100, 0.5); /* ✨ توهج أخضر ناعم */
 }
 
-/* 📱 تحسين وضعه في الهواتف */
+/* 📱 وضع الهاتف: زر الطباعة في منتصف الشاشة أسفل الهيدر */
 @media (max-width: 600px) {
   #printMapBtn {
     left: 50%;
@@ -212,18 +216,18 @@ footer .line2 {
 
 /* 🖨️ إعدادات الطباعة */
 @media print {
-  /* إخفاء أزرار القوائم والطباعة عند الطباعة */
+  /* إخفاء زر القوائم وزر الطباعة عند الطباعة */
   #toggleSidebar,
   #printMapBtn {
     display: none !important;
   }
 
-  /* جعل الخريطة تغطي الصفحة بالكامل أثناء الطباعة */
+  /* جعل الخريطة تغطي الصفحة بالكامل */
   #map {
-    height: 100vh !important;
+    height: 80vh !important;
   }
 
-  /* السماح بطباعة ألوان الخلفية للهيدر والفوتر */
+  /* السماح بطباعة الألوان في الهيدر والفوتر */
   header,
   footer {
     -webkit-print-color-adjust: exact !important;
@@ -729,5 +733,6 @@ map.on("rotate", function(e) {
 </script>
 </body>
 </html>
+
 
 
