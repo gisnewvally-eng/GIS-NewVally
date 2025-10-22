@@ -330,6 +330,19 @@ document.querySelectorAll('input[name="basemap"]').forEach(radio => {
   });
 });
 
+// تغيير لون نص أزرار اختيار الخريطة عند اختيار الخريطة السوداء
+const basemapLabels = document.querySelectorAll('input[name="basemap"] + label');
+
+document.querySelectorAll('input[name="basemap"]').forEach(radio => {
+  radio.addEventListener('change', e => {
+    // تغيير لون النص حسب الخريطة
+    if (e.target.value === 'dark') {
+      basemapLabels.forEach(lbl => lbl.style.color = '#fff'); // نص أبيض
+    } else {
+      basemapLabels.forEach(lbl => lbl.style.color = '#000'); // نص أسود
+    }
+  });
+});
 
 /* --------------
    Icons (local files expected in repo)
@@ -568,6 +581,7 @@ setTimeout(()=>{
 </script>
 </body>
 </html>
+
 
 
 
