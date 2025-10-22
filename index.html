@@ -159,50 +159,66 @@ footer .line2 {
 }
 
 
-  /* Toggle button */
-#toggleSidebar{
-    position:fixed;
-    top: calc(var(--header-height) + 15px);
-    right:10px;
-    z-index:2050;
-    background:var(--green);
-    color:#000;
-    border:none;
-    padding:12px 16px;
-    border-radius:8px;
-    font-weight:800;
-    font-size:20px;
-    min-width:50px;
-    min-height:50px;
-    cursor:pointer;
-    box-shadow:0 2px 6px rgba(0,0,0,0.12);
-}
-/* 🖨️ زر الطباعة - بنفس تصميم زر القوائم مع تأثير توهج أخضر عند التمرير */
-#printMapBtn {
+/* 📍 أزرار القوائم والطباعة */
+.top-buttons {
   position: fixed;
-  top: 80px; /* 🔹 مسافة من الأعلى أسفل الهيدر مباشرة */
-  left: 160px; /* 🔹 تم إزاحته فعليًا لليمين لتفادي أدوات التكبير */
-  background: #00b09b; /* نفس لون زر القوائم */
+  top: calc(var(--header-height) + 10px);
+  right: 10px;
+  z-index: 2050;
+  display: flex;
+  gap: 10px; /* المسافة بين الزرين */
+}
+
+/* زر القوائم */
+#toggleSidebar {
+  background: linear-gradient(90deg, #00b09b, #96c93d);
   color: #fff;
   border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 20px;
-  font-weight: bold;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 18px;
   cursor: pointer;
-  display: flex; /* لتوسيط الأيقونة تمامًا */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-  z-index: 2050;
-  transition: all 0.25s ease;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+#toggleSidebar:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* زر الطباعة */
+#printMapBtn {
+  background: linear-gradient(90deg, #96c93d, #00b09b);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 12px 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 #printMapBtn:hover {
-  background: #555;
-  transform: scale(1.08);
-  box-shadow: 0 0 12px 3px rgba(0, 255, 100, 0.5); /* ✨ توهج أخضر ناعم */
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* 📄 عند الطباعة — إخفاء الزرين */
+@media print {
+  .top-buttons { display: none; }
+  header, footer {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }
 
 /* 📱 وضع الهاتف: زر الطباعة في منتصف الشاشة أسفل الهيدر */
@@ -316,34 +332,7 @@ body.dark-mode #northArrow {
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
 
-/* 🔹 زر الطباعة أسفل الهيدر على اليسار */
-#printMapBtn {
-  position: fixed;
-  top: calc(var(--header-height) + 10px);
-  left: 10px;
-  background: #228B22;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 16px;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  z-index: 2050;
-  transition: background 0.2s ease;
-}
 
-#printMapBtn:hover {
-  background: #1a661a;
-}
-
-/* 🔸 عند الطباعة: إخفاء زر القوائم والطباعة فقط */
-@media print {
-  #toggleSidebar,
-  #printMapBtn {
-    display: none !important;
-  }
 
   #map {
     height: 100vh !important;
@@ -372,12 +361,11 @@ body.dark-mode #northArrow {
     <h1>خريطة مرافق مجمع المصالح الحكومية بمحافظة الوادي الجديد</h1>
   </header>
 
-  <!-- Toggle sidebar button -->
+ <!-- أزرار القوائم والطباعة بجانب بعض -->
+<div class="top-buttons">
   <button id="toggleSidebar" aria-controls="sidebar" aria-expanded="false">☰ القوائم</button>
-  
-  <!-- Toggle print button -->
-  <!-- 🖨️ زر الطباعة -->
   <button id="printMapBtn" title="طباعة الخريطة">🖨️</button>
+</div>
 
   <!-- Sidebar -->
   <aside id="sidebar" class="hidden" aria-hidden="true">
@@ -719,9 +707,7 @@ setTimeout(()=>{
 }, 12000);
   
 // 🖨️ وظيفة زر الطباعة
-document.getElementById('printMapBtn').addEventListener('click', function() {
-  window.print();
-});
+document.getElementById('printMapBtn').addEventListener('click', ()=>{ window.print(); });
 
 
 // 🔄 North Arrow rotation (اختياري إذا أضفت دوران للخريطة)
@@ -733,6 +719,7 @@ map.on("rotate", function(e) {
 </script>
 </body>
 </html>
+
 
 
 
