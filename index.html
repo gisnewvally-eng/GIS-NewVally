@@ -244,6 +244,73 @@ footer .line2 {
     #sidebar{ height:70vh; top:var(--header-height); }
     .floating-buttons button{ min-width:34px; height:34px; font-size:15px; }
   }
+ /* 🔹 North Arrow (الركن السفلي الأيسر) */
+#northArrow {
+  position: absolute;
+  bottom: 20px; /* أسفل الصفحة */
+  left: 20px;   /* يسار الصفحة */
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.7); /* خلفية شفافة */
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2100;
+  pointer-events: none;
+  transition: transform 0.5s ease;
+}
+
+#northArrow::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 40px;
+  background: url('north.png') no-repeat center/contain;
+}
+
+/* في الوضع الليلي */
+body.dark-mode #northArrow {
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+/* 🔹 زر الطباعة أسفل الهيدر على اليسار */
+#printMapBtn {
+  position: fixed;
+  top: calc(var(--header-height) + 10px);
+  left: 10px;
+  background: #228B22;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 2050;
+  transition: background 0.2s ease;
+}
+
+#printMapBtn:hover {
+  background: #1a661a;
+}
+
+/* 🔸 عند الطباعة: إخفاء زر القوائم والطباعة فقط */
+@media print {
+  #toggleSidebar,
+  #printMapBtn {
+    display: none !important;
+  }
+
+  #map {
+    height: 100vh !important;
+  }
+}
+
+
 </style>
 </head>
 <body>
@@ -267,7 +334,9 @@ footer .line2 {
 
   <!-- Toggle sidebar button -->
   <button id="toggleSidebar" aria-controls="sidebar" aria-expanded="false">☰ القوائم</button>
-  <button id="printMap">🖨️ طباعة الخريطة</button>
+  
+   <!-- Toggle print button -->
+  <button id="printMapBtn" title="طباعة الخريطة">🖨️ طباعة الخريطة</button>
 
   <!-- Sidebar -->
   <aside id="sidebar" class="hidden" aria-hidden="true">
@@ -302,6 +371,9 @@ footer .line2 {
 
   <!-- Map -->
   <div id="map" role="application" aria-label="خريطة المرافق"></div>
+  
+  <!-- north Arrow -->
+  <div id="northArrow" title="اتجاه الشمال"></div>
 
   <!-- Footer -->
   <footer>
@@ -604,27 +676,19 @@ setTimeout(()=>{
     overlay.style.display = 'none';
   }
 }, 12000);
+  
 // زر الطباعة
-document.getElementById('printMap').addEventListener('click', ()=>{
+document.getElementById('printMapBtn').addEventListener('click', () => {
   window.print();
+});
+
+// 🔄 North Arrow rotation (اختياري إذا أضفت دوران للخريطة)
+map.on("rotate", function(e) {
+  const angle = e.rotation || 0;
+  document.getElementById("northArrow").style.transform = `rotate(${-angle}deg)`;
 });
 
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
