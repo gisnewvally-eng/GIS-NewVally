@@ -715,7 +715,7 @@ map.on("rotate", function(e) {
   const angle = e.rotation || 0;
   document.getElementById("northArrow").style.transform = `rotate(${-angle}deg)`;
 });
-<script>
+
 // 🔄 دعم دوران الخريطة
 let currentRotation = 0;
 
@@ -737,11 +737,12 @@ rotateControl.onAdd = function () {
   return div;
 };
 rotateControl.addTo(map);
-</script>
+
 
 </script>
 </body>
 </html>
+
 
 
 
