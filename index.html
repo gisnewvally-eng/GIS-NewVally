@@ -711,73 +711,34 @@ setTimeout(()=>{
 document.getElementById('printMapBtn').addEventListener('click', ()=>{ window.print(); });
 
 
-// ==========================
-// 🌍 Rotation like Google Earth
-// ==========================
-let currentRotation = 0; // زاوية الدوران بالدرجات
+// 🔄 تدوير الخريطة يدويًا (مع سهم الشمال)
+let currentRotation = 0; // الزاوية الحالية للخريطة بالدرجات
 const mapContainer = document.getElementById("map");
 const northArrow = document.getElementById("northArrow");
 
-// دالة لتطبيق الدوران بسلاسة على الخريطة والطبقات
-function rotateMap(angle) {
+// دالة لتطبيق الدوران على الخريطة والسهم
+function applyRotation(angle) {
   currentRotation = angle % 360;
-
-  // ندور الخريطة نفسها (Container)
-  mapContainer.style.transition = "transform 0.5s ease";
   mapContainer.style.transform = `rotate(${currentRotation}deg)`;
-
-  // السهم يعكس دوران الخريطة ليظل يشير للشمال الحقيقي
-  northArrow.style.transition = "transform 0.5s ease";
-  northArrow.style.transform = `rotate(${-currentRotation}deg)`;
+  northArrow.style.transform = `rotate(${-currentRotation}deg)`; // عكس دوران الخريطة
 }
 
-// عند الضغط على سهم الشمال، إعادة الخريطة للوضع الطبيعي
+// عند الضغط على زر الشمال تعود الخريطة للوضع الطبيعي
 northArrow.addEventListener("click", () => {
-  rotateMap(0);
+  applyRotation(0);
 });
 
-// مثال: تدوير عبر لوحة المفاتيح
+// 🔁 يمكن إضافة دوران عبر أزرار أو لوحة المفاتيح (اختياري)
 document.addEventListener("keydown", e => {
-  if (e.key === "ArrowLeft") rotateMap(currentRotation - 10); // تدوير يسار
-  if (e.key === "ArrowRight") rotateMap(currentRotation + 10); // تدوير يمين
+  if (e.key === "ArrowLeft") applyRotation(currentRotation - 10); // تدوير يسار
+  if (e.key === "ArrowRight") applyRotation(currentRotation + 10); // تدوير يمين
 });
-
-// 🔹 إضافة أزرار لتدوير الخريطة (اختياري)
-const rotateLeftBtn = document.createElement("button");
-rotateLeftBtn.innerHTML = "⟲";
-rotateLeftBtn.style.position = "absolute";
-rotateLeftBtn.style.bottom = "100px";
-rotateLeftBtn.style.left = "20px";
-rotateLeftBtn.style.zIndex = 1100;
-rotateLeftBtn.style.padding = "8px";
-rotateLeftBtn.style.borderRadius = "50%";
-rotateLeftBtn.style.background = "#fff";
-rotateLeftBtn.style.boxShadow = "0 2px 5px rgba(0,0,0,0.3)";
-rotateLeftBtn.style.cursor = "pointer";
-document.body.appendChild(rotateLeftBtn);
-
-rotateLeftBtn.addEventListener("click", () => rotateMap(currentRotation - 10));
-
-const rotateRightBtn = document.createElement("button");
-rotateRightBtn.innerHTML = "⟳";
-rotateRightBtn.style.position = "absolute";
-rotateRightBtn.style.bottom = "40px";
-rotateRightBtn.style.left = "20px";
-rotateRightBtn.style.zIndex = 1100;
-rotateRightBtn.style.padding = "8px";
-rotateRightBtn.style.borderRadius = "50%";
-rotateRightBtn.style.background = "#fff";
-rotateRightBtn.style.boxShadow = "0 2px 5px rgba(0,0,0,0.3)";
-rotateRightBtn.style.cursor = "pointer";
-document.body.appendChild(rotateRightBtn);
-
-rotateRightBtn.addEventListener("click", () => rotateMap(currentRotation + 10));
-
 
 
 </script>
 </body>
 </html>
+
 
 
 
