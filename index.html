@@ -331,8 +331,13 @@ body.dark-mode #northArrow {
   background: rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
-
-
+/* 🔸 تعديل موقع مفتاح الشمال في وضع الجوال */
+@media (max-width: 768px) {
+  #northArrow {
+    bottom: 80px; /* اجعله أعلى قليلاً لتجنب تغطيته للفوتر */
+    left: 15px;   /* يمكنك ضبطها أيضًا حسب الحاجة */
+  }
+}
 
   #map {
     height: 100vh !important;
@@ -719,6 +724,7 @@ map.on("rotate", function(e) {
 </script>
 </body>
 </html>
+
 
 
 
