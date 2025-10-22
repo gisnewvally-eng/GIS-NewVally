@@ -313,8 +313,8 @@ footer .line2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* أقل من الأزرار لضمان أنها فوقه */
-  pointer-events: none;
+  z-index: 1000;
+  cursor: pointer; /* ✅ الآن يمكن النقر عليه */
   transition: transform 0.5s ease;
 }
 
@@ -711,16 +711,34 @@ setTimeout(()=>{
 document.getElementById('printMapBtn').addEventListener('click', ()=>{ window.print(); });
 
 
-// 🔄 North Arrow rotation (اختياري إذا أضفت دوران للخريطة)
-map.on("rotate", function(e) {
-  const angle = e.rotation || 0;
-  document.getElementById("northArrow").style.transform = `rotate(${-angle}deg)`;
+// 🔄 تدوير الخريطة يدويًا (مع سهم الشمال)
+let currentRotation = 0; // الزاوية الحالية للخريطة بالدرجات
+const mapContainer = document.getElementById("map");
+const northArrow = document.getElementById("northArrow");
+
+// دالة لتطبيق الدوران على الخريطة والسهم
+function applyRotation(angle) {
+  currentRotation = angle % 360;
+  mapContainer.style.transform = `rotate(${currentRotation}deg)`;
+  northArrow.style.transform = `rotate(${-currentRotation}deg)`; // عكس دوران الخريطة
+}
+
+// عند الضغط على زر الشمال تعود الخريطة للوضع الطبيعي
+northArrow.addEventListener("click", () => {
+  applyRotation(0);
+});
+
+// 🔁 يمكن إضافة دوران عبر أزرار أو لوحة المفاتيح (اختياري)
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") applyRotation(currentRotation - 10); // تدوير يسار
+  if (e.key === "ArrowRight") applyRotation(currentRotation + 10); // تدوير يمين
 });
 
 
 </script>
 </body>
 </html>
+
 
 
 
