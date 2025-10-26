@@ -212,6 +212,14 @@ footer .line2 {
   opacity: 0.9;
 }
 
+/* 🎯 إخفاء أزرار التكبير والتصغير عند الطباعة */
+@media print {
+  .leaflet-control-zoom {
+    display: none !important;
+  }
+}
+
+  
 /* 📄 عند الطباعة — إخفاء الزرين */
 @media print {
   .top-buttons { display: none; }
@@ -738,6 +746,7 @@ document.addEventListener("keydown", e => {
 </script>
 </body>
 </html>
+
 
 
 
